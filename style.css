@@ -1,0 +1,46 @@
+body
+{
+  background-color: White;
+  font-family: Arial, Helvetica, Sans-Serif;
+  font-size: 12px;       
+}
+
+a { color:#105289; text-decoration:none; }
+a:hover { color:#d31141; text-decoration:underline }
+
+a.tbheader { color:#000000; text-decoration:none; }
+a.tbheader:hover { color:#d31141; text-decoration:none }
+
+a.tbheadsel { color:#102789; text-decoration:none; }
+a.tbheadsel:hover { color:#d31141; text-decoration:none }
+
+
+table
+{
+  border-collapse:collapse;
+}
+
+td
+{
+  border-width:1px;
+  border-style:solid;
+  border-color:#cccccc;
+  padding-left:2px;
+  padding-right:5px;
+}
+
+.error {
+  font-weight:bold; 
+  color:#ff0000;
+}
+
+div.box {
+  position:absolute; 
+  border-width:2px; 
+  border-color:#ccccff; 
+  border-style:solid;
+  display:none; 
+  background-color:#f4f4ff; 
+  padding:5px;
+  opacity:0.92;
+}
