@@ -1,5 +1,5 @@
 <?php
-  header('Content-Type: text/html; charset=ISO-8859-1');
+  header('Content-Type: text/html; charset=utf-8');
 
   include("config.inc.php");
   include("class_user.inc.php");

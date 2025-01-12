@@ -1,9 +1,12 @@
 <?php
   if (isset($_GET['logout']) && $_GET['logout']) {
+    session_start();
     setcookie("wildkingsstatsuser", $_SESSION['username'], time()-3600);
-    setcookie("wildkingsstatspass", $_SESSION['passwort'], time()-3600);  
+    setcookie("wildkingsstatspass", $_SESSION['passwort'], time()-3600);
+    session_unset();
+    session_destroy();
   }
-  elseif ($_COOKIE['wildkingsstatsuser'] != "") {
+  elseif (isset($_COOKIE['wildkingsstatsuser']) && ($_COOKIE['wildkingsstatsuser'] != "")) {
     header("location: main.php");
     exit;
   }
@@ -40,7 +43,7 @@
             <input type="submit" value="Logon" />
             <input type="hidden" name="logon" value="true" />
 <?php
-  if ($_GET['logon'] == "failed") {
+  if (isset($_GET['logon']) && $_GET['logon'] == "failed") {
     echo "<span style=\"color:red;font-weight:bold\">Login failed!</span>";
   }
 ?>          

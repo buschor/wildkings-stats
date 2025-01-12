@@ -7,6 +7,8 @@ class mhSessionList {
   private $year;
   private $part;
 
+  private $action;
+
   private $partdesc = array(
     1 => "1. Quartal",
     2 => "2. Quartal",
@@ -23,19 +25,20 @@ class mhSessionList {
       $this->year = (int)$aYear;
     else
       $this->year = (int)date("Y");
-
     $this->part = (int)$aPart;
+
+    $this->action = isset($_GET['action']) ? $_GET['action'] : "";
   }
 
   public function show()
   {
-    if (($_GET['action'] == "delete") && ($this->user->getStatus() >= 3))
+    if (($this->action == "delete") && ($this->user->getStatus() >= 3))
     {
       $sess = new mhSession($this->db, $this->user, (int)$_GET['sid']);
       $sess->delete();
 
     }
-    elseif ($_POST['mhsessedit'] && ($this->user->getStatus() >= 3))
+    elseif (isset($_POST['mhsessedit']) && $_POST['mhsessedit'] && ($this->user->getStatus() >= 3))
     {
       $sess = new mhSession($this->db, $this->user, (int)$_POST['sid']);
       $sess->add();
@@ -69,22 +72,22 @@ class mhSessionList {
       $res->close();
       echo "</div>";
 
-      if (($_GET['sid'] > 0) && !isset($_GET['action']))
+      if (isset($_GET['sid']) && ($_GET['sid'] > 0) && ($this->action == ""))
       {
         $sess = new mhSession($this->db, $this->user, (int)$_GET['sid']);
         $sess->show();
       }
-      elseif (($_GET['action'] == "add") && ($this->user->getStatus() >= 3))
+      elseif (($this->action == "add") && ($this->user->getStatus() >= 3))
       {
         $sess = new mhSession($this->db, $this->user, 0);
         $sess->showEditForm();
       }
-      elseif (($_GET['action'] == "edit") && ($this->user->getStatus() >= 3))
+      elseif (($this->action == "edit") && ($this->user->getStatus() >= 3))
       {
         $sess = new mhSession($this->db, $this->user, (int)$_GET['sid']);
         $sess->showEditForm();
       }
-      elseif ($_POST['mhsessedit'] && ($this->user->getStatus() >= 3))
+      elseif (isset($_POST['mhsessedit']) && $_POST['mhsessedit'] && ($this->user->getStatus() >= 3))
       {
         $sess = new mhSession($this->db, $this->user, (int)$_POST['sid']);
         $sess->add();
@@ -137,8 +140,8 @@ class mhSessionList {
     echo "<input type=\"radio\" name=\"mh_table_plsel\" value=\"0\" onclick=\"update_table()\" checked=\"checked\" />Alle&nbsp;&nbsp;";
     echo "<input type=\"radio\" name=\"mh_table_plsel\" value=\"1\" onclick=\"update_table()\" />Member&nbsp;&nbsp;";
     echo "<input type=\"radio\" name=\"mh_table_plsel\" value=\"2\" onclick=\"update_table()\" />Goldmember";
-    echo "<input type=\"hidden\" name=\"year\" value=\"" . $_GET['year'] . "\" />";
-    echo "<input type=\"hidden\" name=\"part\" value=\"" . $_GET['part'] . "\" /></p>";
+    echo "<input type=\"hidden\" name=\"year\" value=\"" . $this->year . "\" />";
+    echo "<input type=\"hidden\" name=\"part\" value=\"" . $this->part . "\" /></p>";
 
     echo "<div id=\"mh_table\">";
     $this->showTotalTable(0, 5, 0);
