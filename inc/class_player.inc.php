@@ -70,7 +70,7 @@ class player {
         if (($this->user->getStatus() >= 3) && ($numsess == 0) && ($this->id != $this->user->getId()))
         {
           echo "<a href=\"" . $_SERVER['PHP_SELF'] . "?site=" . $_GET['site'] . "&amp;year=" . $_GET['year'];
-          echo "&amp;action=delete&amp;pid=" . $this->id . "\" onclick=\"return confirm('Den User wirklich löschen?');\">";
+          echo "&amp;action=delete&amp;pid=" . $this->id . "\" onclick=\"return confirm('Den User wirklich lÃ¶schen?');\">";
           echo "Delete Player</a>";
         }
     }
@@ -201,6 +201,11 @@ class player {
 
   public function showEditForm() {
 
+    $edname = "";
+    $ednamefirst = "";
+    $ednamelast = "";
+    $edteam = "";
+    $edstatus = 0;
     if ($this->id > 0)
     {
       $res = $this->db->query("SELECT pname, pname_first, pname_last, team, status FROM players WHERE pid = " . $this->id);
@@ -359,7 +364,7 @@ class player {
     }
     else
     {
-      echo "Spieler kann nicht gelöscht werden, da dieser in Sessions vorhanden ist!<br />";
+      echo "Spieler kann nicht gelï¿½scht werden, da dieser in Sessions vorhanden ist!<br />";
     }
 
 

@@ -40,7 +40,7 @@ class mhSessionList {
     }
     elseif (isset($_POST['mhsessedit']) && $_POST['mhsessedit'] && ($this->user->getStatus() >= 3))
     {
-      $sess = new mhSession($this->db, $this->user, (int)$_POST['sid']);
+      $sess = new mhSession($this->db, $this->user, (isset($_POST['sid']) ? (int)$_POST['sid'] : 0));
       $sess->add();
     }
     else

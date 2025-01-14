@@ -15,7 +15,6 @@ class mhSession {
 
   public function show()
   {
-
     echo "<div>";
 
     $res = $this->db->query("SELECT UNIX_TIMESTAMP(sessdate) sessdate, location, comment FROM mh_sessions WHERE sid = " . $this->id);

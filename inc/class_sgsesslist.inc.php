@@ -40,7 +40,7 @@ class sgSessionList {
     }
     elseif (isset($_POST['sgsessedit']) && $_POST['sgsessedit'] && ($this->user->getStatus() >= 3))
     {
-      $sess = new sgSession($this->db, $this->user, (int)$_POST['sid']);
+      $sess = new sgSession($this->db, $this->user, (isset($_POST['sid']) ? (int)$_POST['sid'] : 0));
       $sess->add();
     }
     else

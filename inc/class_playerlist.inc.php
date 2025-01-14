@@ -24,7 +24,7 @@ class playerList {
 
     if (isset($_POST['playeredit']) && $_POST['playeredit'] && (($this->user->getStatus() >= 3) || ($_POST['pid'] == $this->user->getId()) ))
     {
-      $pl = new player($this->db, $this->user, (int)$_POST['pid']);
+      $pl = new player($this->db, $this->user, (isset($_POST['pid']) ? (int)$_POST['pid'] : 0));
       $pl->add();
     }
     elseif (($this->action == "delete") && ($this->user->getStatus() >= 3))

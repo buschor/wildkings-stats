@@ -15,7 +15,6 @@ class sgSession {
 
   public function show()
   {
-
     echo "<div style=\"margin-left:200px;\">";
 
     $res = $this->db->query("SELECT UNIX_TIMESTAMP(sessdate) sessdate, buyin, location, comment FROM sg_sessions WHERE sid = " . $this->id);
@@ -64,7 +63,7 @@ class sgSession {
         echo "&amp;action=edit&amp;sid=" . $this->id . "\">";
         echo "Edit Session</a>&nbsp;&nbsp;&nbsp;";
         echo "<a href=\"" . $_SERVER['PHP_SELF'] . "?site=" . $_GET['site'] . "&amp;year=" . $_GET['year'];
-        echo "&amp;action=delete&amp;sid=" . $this->id . "\" onclick=\"return confirm('Die Session wirklich l�schen?');\">";
+        echo "&amp;action=delete&amp;sid=" . $this->id . "\" onclick=\"return confirm('Die Session wirklich löschen?');\">";
         echo "Delete Session</a>";
     }
 
@@ -215,7 +214,7 @@ class sgSession {
 
       if ($this->id > 0) {
         $this->db->query("UPDATE sg_sessions SET sessdate ='" . $sgdate[2] . "-" . $sgdate[1] . "-" . $sgdate[0] . "', " .
-          "buyin = " . (float)$_POST['sgbuyin'] . ", wkpn = " . ($_POST['sgwkpn'] ? "1" : "0") . ", " .
+          "buyin = " . (float)$_POST['sgbuyin'] . ", wkpn = " . ((isset($_POST['sgwkpn']) && $_POST['sgwkpn']) ? "1" : "0") . ", " .
           "location = '" . $this->db->real_escape_string($_POST['sglocation']) . "', " .
 		  "comment = '" . $this->db->real_escape_string($_POST['sgcomment']) . "' " .
           "WHERE sid = " . $this->id);
