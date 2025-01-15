@@ -10,6 +10,7 @@
 
 
   $db = new mysqli(SQLSERVER, SQLUSER, SQLPWD, SQLDB);
+  $db->set_charset('utf8mb4');
 
   session_start();
 

@@ -220,16 +220,14 @@ class sgSession {
           "WHERE sid = " . $this->id);
 
         $this->db->query("DELETE FROM sg_sessdata WHERE sid = " . $this->id);
-
         $sid = $this->id;
       }
       else
       {
         $this->db->query("INSERT INTO sg_sessions (sid, sessdate, buyin, wkpn, location, comment) " .
           "VALUES (NULL, '" . $sgdate[2] . "-" . $sgdate[1] . "-" . $sgdate[0] . "', " . (float)$_POST['sgbuyin'] . ", " .
-          ($_POST['sgwkpn'] ? "1" : "0") . ", '" . $this->db->real_escape_string($_POST['sglocation']) . "', '" .
-		  $this->db->real_escape_string($_POST['sgcomment']) . "')");
-
+          ((isset($_POST['sgwkpn']) && $_POST['sgwkpn']) ? "1" : "0") . ", '" . $this->db->real_escape_string($_POST['sglocation']) . "', '" .
+            $this->db->real_escape_string($_POST['sgcomment']) . "')");
         $sid = $this->db->insert_id;
       }
 
@@ -247,11 +245,9 @@ class sgSession {
 
       echo "Session wurde eingetragen<br />";
       echo "<a href=\"" . $_SERVER['PHP_SELF'] . "?site=" . $_GET['site'] . "&amp;year=" . $_GET['year'] . "\">Zur &Uuml;bersicht</a>";
-
     }
 
     echo "</div>";
-
   }
 
   public function delete() {
