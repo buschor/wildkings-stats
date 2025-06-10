@@ -24,11 +24,11 @@
     $_SESSION['passwort'] = $_POST['logonpass'];
   }
 
-  $user = new user($db, $_SESSION['username'], $_SESSION['passwort']);
+  $user = new user($db, (isset($_SESSION['username']) ? $_SESSION['username'] : ""), (isset($_SESSION['passwort']) ? $_SESSION['passwort'] : ""));
 
   if ($user->getId() == 0) {
-    setcookie("wildkingsstatsuser", $_SESSION['username'], time()-3600);
-    setcookie("wildkingsstatspass", $_SESSION['passwort'], time()-3600);
+    setcookie("wildkingsstatsuser", "", time()-3600);
+    setcookie("wildkingsstatspass", "", time()-3600);
     header("location: index.php?logon=failed");
     exit;
   };

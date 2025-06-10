@@ -1,8 +1,10 @@
 <?php
   if (isset($_GET['logout']) && $_GET['logout']) {
     session_start();
-    setcookie("wildkingsstatsuser", $_SESSION['username'], time()-3600);
-    setcookie("wildkingsstatspass", $_SESSION['passwort'], time()-3600);
+    if (isset($_SESSION['username'])) {
+      setcookie("wildkingsstatsuser", $_SESSION['username'], time()-3600);
+      setcookie("wildkingsstatspass", $_SESSION['passwort'], time()-3600);
+    }
     session_unset();
     session_destroy();
   }
